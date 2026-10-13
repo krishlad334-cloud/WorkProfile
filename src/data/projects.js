@@ -225,7 +225,7 @@ export const projects = [
     categoryLabel: "E-commerce / Full-Stack",
     categories: ["E-commerce", "Full-Stack Development"],
     isFeatured: false,
-    liveUrl: null,
+    liveUrl: "https://lootamo.com/",
     heroImage: "/assets/projects/lootamo-preview.png",
     logoImage: null,
     screenshots: [
