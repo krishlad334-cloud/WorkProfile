@@ -1,12 +1,7 @@
 import React from 'react';
-import { Award, Calendar, Code2, FileText } from 'lucide-react';
+import { Award, Calendar } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import { certifications } from '../data/certifications';
-
-const iconMap = {
-  Code2,
-  FileText,
-};
 
 export default function Certifications() {
   // Ordered strictly by year (Recent to earlier: 2022 -> 2017)
@@ -22,18 +17,22 @@ export default function Certifications() {
         />
 
         <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-8">
-          {sortedCertifications.map((cert) => {
-            const CertIcon = iconMap[cert.icon] || Award;
-            return (
-              <div
-                key={cert.id}
-                className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-2xl bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
-                      <CertIcon className="w-6 h-6" />
+          {sortedCertifications.map((cert) => (
+            <div
+              key={cert.id}
+              className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  {/* Attractive Glowing Award Icon Badge */}
+                  <div className="relative group/icon">
+                    <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-brand-600 via-blue-500 to-indigo-500 opacity-25 group-hover:opacity-75 blur-md transition duration-500" />
+                    <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 via-brand-600 to-indigo-700 p-0.5 shadow-lg shadow-brand-500/25 ring-1 ring-white/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-brand-500/40">
+                      <div className="w-full h-full rounded-[14px] bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center">
+                        <Award className="w-6 h-6 text-white stroke-[2.2] drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105" />
+                      </div>
                     </div>
+                  </div>
                   <div className="flex items-center gap-2">
                     <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-brand-50 text-brand-700 border border-brand-200 dark:bg-brand-950/60 dark:text-brand-300 dark:border-brand-800">
                       {cert.year || cert.duration}

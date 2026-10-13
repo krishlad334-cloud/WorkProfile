@@ -14,8 +14,7 @@ export const certifications = [
     sortYear: 2022,
     description: "Intensive professional program covering advanced Python programming, Django framework architecture, RESTful API design, database modeling, and full-stack web application development.",
     skillsLearned: ["Python", "Django", "REST APIs", "Database Modeling", "Git"],
-    badge: "Professional Certification",
-    icon: "Code2"
+    badge: "Professional Certification"
   },
   {
     id: "diploma-office-management",
@@ -26,7 +25,6 @@ export const certifications = [
     sortYear: 2017,
     description: "Training in computerized business documentation, professional data entry, office administration systems, and technical workflows.",
     skillsLearned: ["Computer Systems", "Office Automation", "Documentation", "Data Management"],
-    badge: "Diploma",
-    icon: "FileText"
+    badge: "Diploma"
   }
 ];
