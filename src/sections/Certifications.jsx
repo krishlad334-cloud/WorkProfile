@@ -73,7 +73,8 @@ export default function Certifications() {
                 <span>{cert.duration}</span>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
