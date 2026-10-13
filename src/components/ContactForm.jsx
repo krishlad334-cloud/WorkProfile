@@ -12,6 +12,7 @@ import {
   Building2,
   Briefcase,
   MessageSquare,
+  ShieldCheck,
 } from 'lucide-react';
 import Button from './Button';
 import { personalInfo } from '../data/personal';
@@ -597,7 +598,7 @@ export default function ContactForm() {
           aria-hidden="true"
         />
 
-        {/* 5. "I am human" Simple Checkbox */}
+        {/* 5. Attractive "I am human" Verification Checkbox */}
         <div className="pt-1">
           <div
             role="checkbox"
@@ -611,34 +612,75 @@ export default function ContactForm() {
                 handleHumanToggle();
               }
             }}
-            className={`inline-flex items-center gap-3 px-4 py-3 rounded-xl border bg-slate-50/90 dark:bg-slate-800/80 select-none transition-all cursor-pointer shadow-sm ${
+            className={`group w-full px-4 py-3.5 rounded-2xl border flex items-center justify-between gap-3 select-none transition-all duration-300 cursor-pointer ${
               errors.human
-                ? 'border-rose-400 dark:border-rose-500 ring-2 ring-rose-500/10'
+                ? 'border-rose-400 dark:border-rose-500 bg-rose-50/40 dark:bg-rose-950/20 ring-2 ring-rose-500/10'
                 : humanStatus === 'verified'
-                  ? 'border-emerald-400/80 dark:border-emerald-500/60 bg-emerald-50/30 dark:bg-emerald-950/20'
-                  : 'border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600'
+                  ? 'border-emerald-400/90 dark:border-emerald-500/60 bg-gradient-to-r from-emerald-50/80 via-teal-50/40 to-white dark:from-emerald-950/30 dark:via-emerald-900/15 dark:to-slate-800/60 shadow-md shadow-emerald-500/10 ring-1 ring-emerald-500/20'
+                  : humanStatus === 'verifying'
+                    ? 'border-brand-400 dark:border-brand-500/60 bg-brand-50/40 dark:bg-brand-950/20 shadow-sm'
+                    : 'border-slate-200/90 dark:border-slate-700/80 bg-gradient-to-r from-slate-50/90 to-white dark:from-slate-800/70 dark:to-slate-800/40 hover:border-brand-500/60 dark:hover:border-brand-500/60 hover:shadow-md hover:shadow-brand-500/5'
             } ${isSubmitting ? 'opacity-60 pointer-events-none' : ''}`}
           >
-            {/* Checkbox Square */}
-            <div
-              className={`w-6 h-6 rounded-md flex items-center justify-center transition-all duration-200 ${
-                humanStatus === 'verified'
-                  ? 'bg-emerald-500 border-2 border-emerald-500 text-white shadow-sm scale-100'
-                  : humanStatus === 'verifying'
-                    ? 'border-2 border-brand-500 bg-white dark:bg-slate-900'
-                    : 'border-2 border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-900 hover:border-brand-500'
-              }`}
-            >
-              {humanStatus === 'verifying' && (
-                <Loader2 className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400 animate-spin" />
-              )}
-              {humanStatus === 'verified' && (
-                <Check className="w-3.5 h-3.5 stroke-[3] text-white animate-scale-in" />
-              )}
+            <div className="flex items-center gap-3.5">
+              {/* Custom Animated Checkbox Square */}
+              <div
+                className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
+                  humanStatus === 'verified'
+                    ? 'bg-gradient-to-br from-emerald-500 to-teal-600 border-2 border-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-105'
+                    : humanStatus === 'verifying'
+                      ? 'border-2 border-brand-500 bg-brand-50 dark:bg-slate-900 ring-4 ring-brand-500/15'
+                      : 'border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 group-hover:border-brand-500 group-hover:ring-4 group-hover:ring-brand-500/10'
+                }`}
+              >
+                {humanStatus === 'verifying' && (
+                  <Loader2 className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400 animate-spin" />
+                )}
+                {humanStatus === 'verified' && (
+                  <Check className="w-3.5 h-3.5 stroke-[3] text-white animate-scale-in" />
+                )}
+              </div>
+
+              <div className="flex flex-col">
+                <span
+                  className={`text-sm font-semibold leading-tight transition-colors ${
+                    humanStatus === 'verified'
+                      ? 'text-emerald-950 dark:text-emerald-200'
+                      : 'text-slate-800 dark:text-slate-100 group-hover:text-brand-600 dark:group-hover:text-brand-400'
+                  }`}
+                >
+                  I am human
+                </span>
+                <span
+                  className={`text-[11px] mt-0.5 transition-colors ${
+                    humanStatus === 'verified'
+                      ? 'text-emerald-600 dark:text-emerald-400 font-medium'
+                      : humanStatus === 'verifying'
+                        ? 'text-brand-600 dark:text-brand-400'
+                        : 'text-slate-400 dark:text-slate-500'
+                  }`}
+                >
+                  {humanStatus === 'verified'
+                    ? 'Verified — ready to send message'
+                    : humanStatus === 'verifying'
+                      ? 'Verifying...'
+                      : 'Click to confirm before sending'}
+                </span>
+              </div>
             </div>
 
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-              I am human
+            {/* Clean Status Pill Badge */}
+            <span
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold shrink-0 transition-all duration-300 ${
+                humanStatus === 'verified'
+                  ? 'bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/25'
+                  : humanStatus === 'verifying'
+                    ? 'bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20'
+                    : 'bg-slate-100 text-slate-500 dark:bg-slate-700/60 dark:text-slate-400 border border-slate-200/70 dark:border-slate-700 group-hover:bg-brand-50 group-hover:text-brand-600 group-hover:border-brand-200 dark:group-hover:bg-brand-950/50 dark:group-hover:text-brand-400 dark:group-hover:border-brand-800'
+              }`}
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>{humanStatus === 'verified' ? 'Verified' : 'Verify'}</span>
             </span>
           </div>
 
